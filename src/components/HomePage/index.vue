@@ -89,6 +89,9 @@
               </div>
               <div class="activity-describe">
                 {{activity.Description}}
+                <div class="describe-readmore">
+                  ...
+                </div>
               </div>
               <div class="activity-detail">
                 <div class="activity-organizer">
