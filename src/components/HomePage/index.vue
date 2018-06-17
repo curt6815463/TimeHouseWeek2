@@ -30,7 +30,7 @@
 
           <div class="sidebar-date">
             <div class="sidebar-title">
-              Date
+              Date //尚未實作
             </div>
             <div class="sidebar-date-form">
               <div class="form-title">

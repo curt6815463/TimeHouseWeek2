@@ -66,9 +66,10 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
-// html {
-//   height: 100%;
-// }
+html {
+  height: 100%;
+  background-color: #f2f2f2;
+}
 // body , #app , .router-view{
 //   height: 100%;
 // }
