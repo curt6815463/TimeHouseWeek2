@@ -76,6 +76,48 @@
         </div>
       </div>
       <div class="main">
+        <div class="main-title-text">
+          Showing <span>{{1}}</span> results by...
+        </div>
+        <div class="main-title-tags">
+          <div class="title-tag">
+            tainan
+            <font-awesome-icon class="times-icon" icon="times" />
+          </div>
+        </div>
+        <div class="activities">
+          <div class="activity" v-for="activity in activities">
+            <div class="activity-image">
+
+            </div>
+            <div class="main-content">
+              <div class="activity-title">
+                sdfasdfasdfasdf
+              </div>
+              <div class="activity-describe">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim
+              </div>
+              <div class="activity-detail">
+                <div class="activity-organizer">
+                  asdfasdfa
+                </div>
+                <div class="activity-tag">
+                  sport
+                </div>
+              </div>
+              <div class="activity-detail">
+                <div class="activity-address">
+                  <font-awesome-icon class="search-icon" icon="search" />
+                  taiwan
+                </div>
+                <div class="activity-date">
+                  <font-awesome-icon class="search-icon" icon="calendar-alt" />
+                  {{1}} - {{2}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
       </div>
     </div>
@@ -92,7 +134,7 @@ export default {
   },
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      activities: [1,2,3]
     }
   }
 }
