@@ -17,10 +17,11 @@
             <div class="sidebar-title">
               Location
             </div>
-            <select class="" name="">
-              <option value="">Taiwan</option>
-              <option value="">2</option>
-              <option value="">3</option>
+            <select class="" name="" v-model="zoneFilter">
+              <option value="all">All</option>
+              <option v-for="zone in activitiesZone" :value="zone">
+                {{zone}}
+              </option>
             </select>
           </div>
 
@@ -68,8 +69,12 @@
           Showing <span>{{activitiesResult.length}}</span> results by...
         </div>
         <div class="main-title-tags">
-          <div class="title-tag">
-            tainan
+          <div class="title-tag" v-if="isFreeFilter">
+            免費參觀
+            <font-awesome-icon @click="setIsFreeFilter" class="times-icon" icon="times" />
+          </div>
+          <div class="title-tag" @click="setNotFreeFilter" v-if="notFreeFilter">
+            非免費參觀
             <font-awesome-icon class="times-icon" icon="times" />
           </div>
         </div>
@@ -123,16 +128,23 @@ export default {
   data () {
     return {
       activities: [],
+      activitiesZone:[],
       categories:'',
       isFreeFilter: false,
       notFreeFilter: false,
-      exploreFilter: ''
+      exploreFilter: '',
+      zoneFilter: 'all'
     }
   },
   mounted(){
     axios.get('https://data.kcg.gov.tw/api/action/datastore_search?resource_id=92290ee5-6e61-456f-80c0-249eae2fcc97&limit=200')
       .then((response)  => {
         this.activities = response.data.result.records
+        response.data.result.records.forEach((activity) => {
+          if(!this.activitiesZone.includes(activity.Zone)){
+            this.activitiesZone.push(activity.Zone)
+          }
+        })
       })
   },
   computed:{
@@ -168,7 +180,25 @@ export default {
           }
         })
       }
+      if(this.zoneFilter !== 'all'){
+        activitiesResult = activitiesResult.filter((activity) => {
+          if(activity.Zone === this.zoneFilter){
+            return true
+          }
+          else {
+            return false
+          }
+        })
+      }
       return activitiesResult
+    }
+  },
+  methods:{
+    setIsFreeFilter(){
+      this.isFreeFilter = false
+    },
+    setNotFreeFilter(){
+      this.notFreeFilter = false
     }
   }
 }
