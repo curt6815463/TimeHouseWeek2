@@ -6,7 +6,7 @@
       </div>
       <div class="explore">
         <font-awesome-icon class="search-icon" icon="search" />
-        <input type="text" placeholder="Explore your own activities">
+        <input v-model="exploreFilter" type="text" placeholder="Explore your own activities">
       </div>
     </div>
     <div class="content">
@@ -52,24 +52,12 @@
             </div>
             <div class="sidebar-categories-form">
               <div>
-                <input type="checkbox">
-                <label for="">all</label>
+                <input id="is-free" type="checkbox" v-model="isFreeFilter">
+                <label for="is-free">免費參觀</label>
               </div>
               <div>
-                <input type="checkbox">
-                <label for="">ca</label>
-              </div>
-              <div>
-                <input type="checkbox">
-                <label for="">b</label>
-              </div>
-              <div>
-                <input type="checkbox">
-                <label for="">a</label>
-              </div>
-              <div>
-                <input type="checkbox">
-                <label for="">ee</label>
+                <input id="not-free" type="checkbox" v-model="notFreeFilter">
+                <label for="not-free">非免費參觀</label>
               </div>
             </div>
           </div>
@@ -77,7 +65,7 @@
       </div>
       <div class="main">
         <div class="main-title-text">
-          Showing <span>{{1}}</span> results by...
+          Showing <span>{{activitiesResult.length}}</span> results by...
         </div>
         <div class="main-title-tags">
           <div class="title-tag">
@@ -86,33 +74,33 @@
           </div>
         </div>
         <div class="activities">
-          <div class="activity" v-for="activity in activities">
-            <div class="activity-image">
+          <div class="activity" v-for="activity in activitiesResult">
+            <div class="activity-image" :style="{backgroundImage: 'url(' + activity.Picture1 + ')'}">
 
             </div>
             <div class="main-content">
               <div class="activity-title">
-                sdfasdfasdfasdf
+                {{activity.Name}}
               </div>
               <div class="activity-describe">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim
+                {{activity.Description}}
               </div>
               <div class="activity-detail">
                 <div class="activity-organizer">
-                  asdfasdfa
+                  {{activity.Name}}
                 </div>
                 <div class="activity-tag">
-                  sport
+                  {{activity.Ticketinfo ? activity.Ticketinfo : '非免費參觀'}}
                 </div>
               </div>
               <div class="activity-detail">
                 <div class="activity-address">
                   <font-awesome-icon class="search-icon" icon="search" />
-                  taiwan
+                  {{activity.Zone}}
                 </div>
                 <div class="activity-date">
                   <font-awesome-icon class="search-icon" icon="calendar-alt" />
-                  {{1}} - {{2}}
+                  {{activity.Changetime}}
                 </div>
               </div>
             </div>
@@ -126,7 +114,7 @@
 
 <script>
 import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
-
+import axios from 'axios'
 export default {
   name: 'HelloWorld',
   components: {
@@ -134,7 +122,53 @@ export default {
   },
   data () {
     return {
-      activities: [1,2,3]
+      activities: [],
+      categories:'',
+      isFreeFilter: false,
+      notFreeFilter: false,
+      exploreFilter: ''
+    }
+  },
+  mounted(){
+    axios.get('https://data.kcg.gov.tw/api/action/datastore_search?resource_id=92290ee5-6e61-456f-80c0-249eae2fcc97&limit=200')
+      .then((response)  => {
+        this.activities = response.data.result.records
+      })
+  },
+  computed:{
+    activitiesResult(){
+      let activitiesResult = this.activities
+      if(this.isFreeFilter){
+        activitiesResult = activitiesResult.filter((activity) => {
+          if(activity.Ticketinfo === '免費參觀'){
+            return true
+          }
+          else {
+            return false
+          }
+        })
+      }
+      if(this.notFreeFilter){
+        activitiesResult = activitiesResult.filter((activity) => {
+          if(activity.Ticketinfo !== '免費參觀'){
+            return true
+          }
+          else {
+            return false
+          }
+        })
+      }
+      if(this.exploreFilter !== ''){
+        activitiesResult = activitiesResult.filter((activity) => {
+          if(activity.Name.includes(this.exploreFilter)){
+            return true
+          }
+          else {
+            return false
+          }
+        })
+      }
+      return activitiesResult
     }
   }
 }
