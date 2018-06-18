@@ -88,7 +88,7 @@
           </div>
         </div>
         <div class="activities">
-          <div class="activity" v-for="activity in activitiesResult">
+          <div class="activity" v-for="(activity, index) in activitiesResult" @click="readMore(activity)">
             <div class="activity-image" :style="{backgroundImage: 'url(' + activity.Picture1 + ')'}">
 
             </div>
@@ -96,9 +96,9 @@
               <div class="activity-title">
                 {{activity.Name}}
               </div>
-              <div class="activity-describe">
+              <div class="activity-describe" :class="{'activity-describe-active':activity.active}">
                 {{activity.Description}}
-                <div class="describe-readmore">
+                <div v-if="!activity.active" class="describe-readmore">
                   ...
                 </div>
               </div>
@@ -166,11 +166,15 @@ export default {
   mounted () {
     axios.get('https://data.kcg.gov.tw/api/action/datastore_search?resource_id=92290ee5-6e61-456f-80c0-249eae2fcc97&limit=200')
       .then((response) => {
-        this.activities = response.data.result.records
-        response.data.result.records.forEach((activity) => {
+        // this.activities = response.data.result.records
+        let records = response.data.result.records
+
+        records.forEach((activity) => {
+          activity.active = false
           if (!this.activitiesZone.includes(activity.Zone)) {
             this.activitiesZone.push(activity.Zone)
           }
+          this.activities.push(activity)
         })
       })
   },
@@ -220,6 +224,9 @@ export default {
     mobileIconControl(index) {
       this.sidebarIcon[index].sidebarPlusIcon = !this.sidebarIcon[index].sidebarPlusIcon
       this.sidebarIcon[index].sidebarMinusIcon = !this.sidebarIcon[index].sidebarPlusIcon
+    },
+    readMore(activity){
+      activity.active = !activity.active
     },
     setIsFreeFilter () {
       this.isFreeFilter = false
