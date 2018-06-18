@@ -91,7 +91,7 @@ $primary-color: #7828B4;
         .sidebar-date-form{
           display: flex;
           .form-title{
-            width: 25%;
+            width: 3.5rem;
             box-sizing: border-box;
             padding-right: 10px;
             label{
@@ -106,7 +106,7 @@ $primary-color: #7828B4;
             }
           }
           .form-input{
-            width: 75%;
+            width: calc(100% - 3.5rem);
             input{
               box-sizing: border-box;
               height: 2rem;

@@ -6,13 +6,12 @@
       </div>
       <div class="explore">
         <font-awesome-icon class="search-icon" icon="search" />
-        <input v-model="exploreFilter" type="text" placeholder="Explore your own activities">
+        <!-- <input v-model="exploreFilter" type="text" placeholder="Explore your own activities"> -->
       </div>
     </div>
     <div class="content">
       <div class="sidebar">
         <div class="sidebar-container">
-
           <div class="sidebar-location">
             <div class="sidebar-title">
               Location
@@ -24,10 +23,8 @@
               </option>
             </select>
           </div>
-
           <div class="sidebar-divider">
           </div>
-
           <div class="sidebar-date">
             <div class="sidebar-title">
               Date //尚未實作
@@ -43,11 +40,9 @@
               </div>
             </div>
           </div>
-
           <div class="sidebar-divider">
           </div>
-
-          <div class="categories">
+          <div class="sidebar-categories">
             <div class="sidebar-title">
               Categories
             </div>
@@ -64,6 +59,8 @@
           </div>
         </div>
       </div>
+
+
       <div class="main">
         <div class="main-title-text">
           Showing <span>{{activitiesResult.length}}</span> results by...

@@ -1,6 +1,10 @@
 @media screen and (min-width: 1200px) {
   .sidebar{
+    display: block;
     padding: 0 2.2rem;
+  }
+  .sidebar-mobile{
+    display: none;
   }
   .activity{
     display:flex;
@@ -17,9 +21,48 @@
 
 @media screen and (max-width: 1199px) and (min-width: 768px){
   .sidebar{
+    display: block;
     padding: 0 2.2rem;
     padding-left: 0;
   }
+  .sidebar-mobile{
+    display: none;
+  }
+  .activity{
+    display:block;
+    .activity-image{
+      width: 100%;
+      height: 220px;
+    }
+    .main-content{
+      width: 100%;
+    }
+  }
+}
+
+@media screen and (max-width: 767px){
+  .content{
+    display: block;
+    .sidebar{
+      width: 100%;
+      .sidebar-container{
+        .sidebar-title{
+          padding: 1.5rem 0;
+        }
+      }
+      .sidebar-location, .sidebar-date, .sidebar-categories{
+        height: 68px;
+        overflow: hidden;
+      }
+    }
+    .main{
+      width: 100%;
+      padding: 0 2.2em;
+    }
+  }
+
+
+
   .activity{
     display:block;
     .activity-image{
