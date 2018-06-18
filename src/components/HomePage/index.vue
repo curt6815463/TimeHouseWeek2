@@ -6,7 +6,7 @@
       </div>
       <div class="explore">
         <font-awesome-icon class="search-icon" icon="search" />
-        <!-- <input v-model="exploreFilter" type="text" placeholder="Explore your own activities"> -->
+        <input v-model="exploreFilter" type="text" placeholder="Explore your own activities">
       </div>
     </div>
     <div class="content">
