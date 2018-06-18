@@ -12,9 +12,13 @@
     <div class="content">
       <div class="sidebar">
         <div class="sidebar-container">
-          <div class="sidebar-location">
+          <div class="sidebar-location" :class="{'sidebar-unfold': sidebarIcon[0].sidebarPlusIcon}">
             <div class="sidebar-title">
               Location
+              <div class="sidebar-title-mobile-icon" @click="mobileIconControl(0)">
+                <font-awesome-icon v-if="sidebarIcon[0].sidebarPlusIcon" class="plus-icon" icon="plus" />
+                <font-awesome-icon v-if="sidebarIcon[0].sidebarMinusIcon" class="minus-icon" icon="minus" />
+              </div>
             </div>
             <select class="" name="" v-model="zoneFilter">
               <option value="all">All</option>
@@ -25,9 +29,13 @@
           </div>
           <div class="sidebar-divider">
           </div>
-          <div class="sidebar-date">
+          <div class="sidebar-date" :class="{'sidebar-unfold': sidebarIcon[1].sidebarPlusIcon}">
             <div class="sidebar-title">
               Date //尚未實作
+              <div class="sidebar-title-mobile-icon" @click="mobileIconControl(1)">
+                <font-awesome-icon v-if="sidebarIcon[1].sidebarPlusIcon" class="plus-icon" icon="plus" />
+                <font-awesome-icon v-if="sidebarIcon[1].sidebarMinusIcon" class="minus-icon" icon="minus" />
+              </div>
             </div>
             <div class="sidebar-date-form">
               <div class="form-title">
@@ -42,9 +50,13 @@
           </div>
           <div class="sidebar-divider">
           </div>
-          <div class="sidebar-categories">
+          <div class="sidebar-categories" :class="{'sidebar-unfold': sidebarIcon[2].sidebarPlusIcon}">
             <div class="sidebar-title">
               Categories
+              <div class="sidebar-title-mobile-icon" @click="mobileIconControl(2)">
+                <font-awesome-icon v-if="sidebarIcon[2].sidebarPlusIcon" class="plus-icon" icon="plus" />
+                <font-awesome-icon v-if="sidebarIcon[2].sidebarMinusIcon" class="minus-icon" icon="minus" />
+              </div>
             </div>
             <div class="sidebar-categories-form">
               <div>
@@ -133,7 +145,22 @@ export default {
       isFreeFilter: false,
       notFreeFilter: false,
       exploreFilter: '',
-      zoneFilter: 'all'
+      zoneFilter: 'all',
+      sidebarIcon: [
+        {
+          sidebarPlusIcon: false,
+          sidebarMinusIcon: true
+        },
+        {
+          sidebarPlusIcon: false,
+          sidebarMinusIcon: true
+        },
+        {
+          sidebarPlusIcon: false,
+          sidebarMinusIcon: true
+        }
+      ]
+
     }
   },
   mounted () {
@@ -190,6 +217,10 @@ export default {
     }
   },
   methods: {
+    mobileIconControl(index) {
+      this.sidebarIcon[index].sidebarPlusIcon = !this.sidebarIcon[index].sidebarPlusIcon
+      this.sidebarIcon[index].sidebarMinusIcon = !this.sidebarIcon[index].sidebarPlusIcon
+    },
     setIsFreeFilter () {
       this.isFreeFilter = false
     },

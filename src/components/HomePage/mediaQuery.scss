@@ -2,6 +2,11 @@
   .sidebar{
     display: block;
     padding: 0 2.2rem;
+    .sidebar-title{
+      .sidebar-title-mobile-icon{
+        display: none;
+      }
+    }
   }
   .sidebar-mobile{
     display: none;
@@ -24,6 +29,11 @@
     display: block;
     padding: 0 2.2rem;
     padding-left: 0;
+    .sidebar-title{
+      .sidebar-title-mobile-icon{
+        display: none;
+      }
+    }
   }
   .sidebar-mobile{
     display: none;
@@ -48,11 +58,21 @@
       .sidebar-container{
         .sidebar-title{
           padding: 1.5rem 0;
+          .sidebar-title-mobile-icon{
+            color:  #9B9B9B;
+            display: block;
+            position: absolute;
+            right: 0;
+            top:24px;
+          }
         }
       }
       .sidebar-location, .sidebar-date, .sidebar-categories{
         height: 68px;
         overflow: hidden;
+      }
+      .sidebar-unfold{
+        height: 100%;
       }
     }
     .main{
@@ -60,9 +80,6 @@
       padding: 0 2.2em;
     }
   }
-
-
-
   .activity{
     display:block;
     .activity-image{
