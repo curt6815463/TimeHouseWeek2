@@ -1,0 +1,33 @@
+@media screen and (min-width: 1200px) {
+  .sidebar{
+    padding: 0 2.2rem;
+  }
+  .activity{
+    display:flex;
+    .activity-image{
+      width: 220px;
+      height: 220px;
+    }
+    .main-content{
+      width: calc(100% - 220px);
+    }
+  }
+}
+
+
+@media screen and (max-width: 1199px) and (min-width: 768px){
+  .sidebar{
+    padding: 0 2.2rem;
+    padding-left: 0;
+  }
+  .activity{
+    display:block;
+    .activity-image{
+      width: 100%;
+      height: 220px;
+    }
+    .main-content{
+      width: 100%;
+    }
+  }
+}

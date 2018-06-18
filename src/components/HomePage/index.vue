@@ -131,64 +131,60 @@ export default {
   data () {
     return {
       activities: [],
-      activitiesZone:[],
-      categories:'',
+      activitiesZone: [],
+      categories: '',
       isFreeFilter: false,
       notFreeFilter: false,
       exploreFilter: '',
       zoneFilter: 'all'
     }
   },
-  mounted(){
+  mounted () {
     axios.get('https://data.kcg.gov.tw/api/action/datastore_search?resource_id=92290ee5-6e61-456f-80c0-249eae2fcc97&limit=200')
-      .then((response)  => {
+      .then((response) => {
         this.activities = response.data.result.records
         response.data.result.records.forEach((activity) => {
-          if(!this.activitiesZone.includes(activity.Zone)){
+          if (!this.activitiesZone.includes(activity.Zone)) {
             this.activitiesZone.push(activity.Zone)
           }
         })
       })
   },
-  computed:{
-    activitiesResult(){
+  computed: {
+    activitiesResult () {
       let activitiesResult = this.activities
-      if(this.isFreeFilter){
+      if (this.isFreeFilter) {
         activitiesResult = activitiesResult.filter((activity) => {
-          if(activity.Ticketinfo === '免費參觀'){
+          if (activity.Ticketinfo === '免費參觀') {
             return true
-          }
-          else {
+          } else {
             return false
           }
         })
       }
-      if(this.notFreeFilter){
+      if (this.notFreeFilter) {
         activitiesResult = activitiesResult.filter((activity) => {
-          if(activity.Ticketinfo !== '免費參觀'){
+          if (activity.Ticketinfo !== '免費參觀') {
             return true
-          }
-          else {
+          } else {
             return false
           }
         })
       }
-      if(this.exploreFilter !== ''){
+      if (this.exploreFilter !== '') {
         activitiesResult = activitiesResult.filter((activity) => {
-          if(activity.Name.includes(this.exploreFilter)){
+          if (activity.Name.includes(this.exploreFilter)) {
             return true
-          }
-          else {
+          } else {
             return false
           }
         })
       }
-      if(this.zoneFilter !== 'all'){
+      if (this.zoneFilter !== 'all') {
         activitiesResult = activitiesResult.filter((activity) => {
-          if(activity.Zone === this.zoneFilter){
+          if (activity.Zone === this.zoneFilter) {
             return true
-          }
-          else {
+          } else {
             return false
           }
         })
@@ -196,11 +192,11 @@ export default {
       return activitiesResult
     }
   },
-  methods:{
-    setIsFreeFilter(){
+  methods: {
+    setIsFreeFilter () {
       this.isFreeFilter = false
     },
-    setNotFreeFilter(){
+    setNotFreeFilter () {
       this.notFreeFilter = false
     }
   }
@@ -210,4 +206,5 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
   @import './index.scss';
+  @import './mediaQuery.scss';
 </style>

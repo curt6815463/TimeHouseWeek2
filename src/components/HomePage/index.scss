@@ -63,7 +63,7 @@ $primary-color: #7828B4;
   .sidebar{
     box-sizing: border-box;
     width: 360px;
-    padding: 0 2.2rem;
+    // padding: 0 2.2rem;
     .sidebar-container{
       background-color: #EBEBEB;
       padding: 0 2.2rem;
@@ -156,17 +156,15 @@ $primary-color: #7828B4;
       margin-top: 1.5rem;
       .activity{
         margin-bottom: 1.5rem;
-        display: flex;
+        // display: flex;
         .activity-image{
-          width: 220px;
-          height: 220px;
           background-image: url('https://fakeimg.pl/250x100');
           background-size: cover;
           background-position: center;
         }
         .main-content{
           box-sizing: border-box;
-          width: calc(100% - 220px);
+          // width: calc(100% - 220px);
           padding: 1rem 1.2rem;
           background-color: #fff;
           .activity-title{
